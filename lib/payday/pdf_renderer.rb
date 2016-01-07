@@ -20,6 +20,7 @@ module Payday
       # set up some default styling
       pdf.font_size(8)
 
+      title(invoice, pdf)
       stamp(invoice, pdf)
       company_banner(invoice, pdf)
       bill_to_ship_to(invoice, pdf)
@@ -31,6 +32,17 @@ module Payday
       page_numbers(pdf)
 
       pdf
+    end
+
+    def self.title(invoice, pdf)
+      if invoice.title
+        pdf.bounding_box([0, pdf.cursor], width: pdf.bounds.width) do
+          pdf.font("Helvetica-Bold") do
+            pdf.fill_color "000000"
+            pdf.text invoice.title, align: :center, size: 28
+          end
+        end
+      end
     end
 
     def self.stamp(invoice, pdf)

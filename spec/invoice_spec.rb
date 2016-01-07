@@ -10,7 +10,8 @@ module Payday
             [LineItem.new(price: 10, quantity: 3, description: "Shirts")],
           shipping_rate: 15.00, shipping_description: "USPS Priority Mail:",
           tax_rate: 0.125, tax_description: "Local Sales Tax, 12.5%",
-          invoice_date: Date.civil(1993, 4, 12))
+          invoice_date: Date.civil(1993, 4, 12),
+          title:"Invoice")
 
       expect(i.invoice_number).to eq(20)
       expect(i.bill_to).to eq("Here")
@@ -22,6 +23,7 @@ module Payday
       expect(i.tax_rate).to eq(BigDecimal.new("0.125"))
       expect(i.tax_description).to eq("Local Sales Tax, 12.5%")
       expect(i.invoice_date).to eq(Date.civil(1993, 4, 12))
+      expect(i.title).to eq("Invoice")
     end
 
     it "should total all of the line items into a subtotal correctly" do
@@ -193,6 +195,12 @@ module Payday
 
           expect(invoice.render_pdf).to match_binary_asset "svg.pdf"
         end
+
+        it "should render an invoice with title" do
+          invoice.title = "Lovely Title"
+          expect(invoice.render_pdf).to match_binary_asset "titled.pdf"
+        end
+
       end
 
       def new_invoice(params = {})
