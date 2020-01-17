@@ -92,7 +92,7 @@ module Payday
 
       # render the company details
       table_data = []
-      table_data << [bold_cell(pdf, invoice_or_default(invoice, :company_name).strip, size: 11)]
+      table_data << [bold_cell(pdf, invoice_or_default(invoice, :company_name).strip, size: 10)]
 
       invoice_or_default(invoice, :company_details).lines.each { |line| table_data << [line] }
 
