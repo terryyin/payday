@@ -148,8 +148,8 @@ module Payday
           invoice_date = invoice.invoice_date.to_s
         end
 
-        table_data << [bold_cell(pdf, I18n.t("payday.invoice.invoice_date", default: "Invoice Date:")),
-                       bold_cell(pdf, invoice_date, align: :right)]
+        table_data << [bold_cell_nowrap(pdf, I18n.t("payday.invoice.invoice_date", default: "Invoice Date:")),
+                       bold_cell_nowrap(pdf, invoice_date, align: :right)]
       end
 
       # Due on
@@ -160,8 +160,8 @@ module Payday
           due_date = invoice.due_at.to_s
         end
 
-        table_data << [bold_cell(pdf, I18n.t("payday.invoice.due_date", default: "Due Date:")),
-                       bold_cell(pdf, due_date, align: :right)]
+        table_data << [bold_cell_nowrap(pdf, I18n.t("payday.invoice.due_date", default: "Due Date:")),
+                       bold_cell_nowrap(pdf, due_date, align: :right)]
       end
 
       # Paid on
@@ -172,8 +172,8 @@ module Payday
           paid_date = invoice.paid_at.to_s
         end
 
-        table_data << [bold_cell(pdf, I18n.t("payday.invoice.paid_date", default: "Paid Date:")),
-                       bold_cell(pdf, paid_date, align: :right)]
+        table_data << [bold_cell_nowrap(pdf, I18n.t("payday.invoice.paid_date", default: "Paid Date:")),
+                       bold_cell_nowrap(pdf, paid_date, align: :right)]
       end
 
       # Refunded on
@@ -184,8 +184,8 @@ module Payday
           refunded_date = invoice.refunded_at.to_s
         end
 
-        table_data << [bold_cell(pdf, I18n.t("payday.invoice.refunded_date", default: "Refunded Date:")),
-                       bold_cell(pdf, refunded_date, align: :right)]
+        table_data << [bold_cell_nowrap(pdf, I18n.t("payday.invoice.refunded_date", default: "Refunded Date:")),
+                       bold_cell_nowrap(pdf, refunded_date, align: :right)]
       end
 
       # loop through invoice_details and include them
@@ -310,6 +310,13 @@ module Payday
 
     def self.bold_cell(pdf, text, options = {})
       cell(pdf, "<b>#{text}</b>", options.merge(inline_format: true))
+    end
+
+    def self.bold_cell_nowrap(pdf, text, options = {})
+      # after move to Ruby 2.7.1 somehow there's some unexpected line wrapping.
+      bold_cell(pdf, text, options).tap do |c|
+        c.width = c.natural_content_width * 1.2 + c.padding_left + c.padding_right
+      end
     end
 
     # Converts this number to a formatted currency string

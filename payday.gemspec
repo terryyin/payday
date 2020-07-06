@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
     the near future.
   EOF
 
-  s.add_dependency("prawn", "~> 2.1.0")
+  s.add_dependency("prawn")
   s.add_dependency("money")
-  s.add_dependency("prawn-table", "~> 0.2.2")
-  s.add_dependency("prawn-svg", "~> 0.22.1")
+  s.add_dependency("prawn-table")
+  s.add_dependency("prawn-svg")
   s.add_dependency("i18n")
 
   s.add_development_dependency("rspec", "~> 3.1.0")

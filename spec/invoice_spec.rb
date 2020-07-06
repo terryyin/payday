@@ -197,7 +197,7 @@ module Payday
         end
 
         it "should render an invoice with title" do
-          invoice.title = "Receipt"
+          invoice.title = "This is a Receipt"
           expect(invoice.render_pdf).to match_binary_asset "titled.pdf"
         end
 
