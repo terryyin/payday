@@ -315,7 +315,7 @@ module Payday
     def self.bold_cell_nowrap(pdf, text, options = {})
       # after move to Ruby 2.7.1 somehow there's some unexpected line wrapping.
       bold_cell(pdf, text, options).tap do |c|
-        c.width = c.natural_content_width * 1.2 + c.padding_left + c.padding_right
+        c.width = c.natural_content_width * 1.3 + c.padding_left + c.padding_right
       end
     end
 
