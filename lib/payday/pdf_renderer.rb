@@ -314,9 +314,7 @@ module Payday
 
     def self.bold_cell_nowrap(pdf, text, options = {})
       # after move to Ruby 2.7.1 somehow there's some unexpected line wrapping.
-      bold_cell(pdf, text, options).tap do |c|
-        c.width = c.natural_content_width * Payday::Config.default.bold_width_adjustment + c.padding_left + c.padding_right
-      end
+      bold_cell(pdf, text.split.join(Prawn::Text::NBSP), options)
     end
 
     # Converts this number to a formatted currency string
