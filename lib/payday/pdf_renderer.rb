@@ -136,8 +136,8 @@ module Payday
 
       # invoice number
       if defined?(invoice.invoice_number) && invoice.invoice_number
-        table_data << [bold_cell(pdf, I18n.t("payday.invoice.invoice_no", default: "Invoice #:")),
-                       bold_cell(pdf, invoice.invoice_number.to_s, align: :right)]
+        table_data << [bold_cell_nowrap(pdf, I18n.t("payday.invoice.invoice_no", default: "Invoice #:")),
+                       bold_cell_nowrap(pdf, invoice.invoice_number.to_s, align: :right)]
       end
 
       # invoice date
@@ -190,8 +190,8 @@ module Payday
 
       # loop through invoice_details and include them
       invoice.each_detail do |key, value|
-        table_data << [bold_cell(pdf, key),
-                       bold_cell(pdf, value, align: :right)]
+        table_data << [bold_cell_nowrap(pdf, key),
+                       bold_cell_nowrap(pdf, value, align: :right)]
       end
 
       if table_data.length > 0
